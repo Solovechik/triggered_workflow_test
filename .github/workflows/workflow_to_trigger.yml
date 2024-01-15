@@ -6,6 +6,9 @@ on:
         type: string
         description: 'Release version'     
         required: true
+
+permissions:
+  contents: write
     
 jobs:
   workflow_trigger:
