@@ -1,18 +1,27 @@
 name: workflow_to_trigger
-run-name: ${{ github.actor }} is testing triggers
 on: 
   workflow_dispatch:
     inputs:
       version:
-        description: 'Log level'     
+        type: string
+        description: 'Release version'     
         required: true
-        default: 'warning'
     
 jobs:
   workflow_trigger:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Triggering wokflow"
-      - run: echo ${{ github.event.inputs.version }}
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Create a release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.event.inputs.version  }}
+          release_name: ${{ github.event.inputs.version }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
