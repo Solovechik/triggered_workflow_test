@@ -1,7 +1,12 @@
 name: workflow_to_trigger
 run-name: ${{ github.actor }} is testing triggers
 on: 
-  [workflow_dispatch]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
     
 jobs:
   workflow_trigger:
