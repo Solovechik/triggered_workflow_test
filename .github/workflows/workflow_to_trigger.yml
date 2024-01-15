@@ -1,7 +1,7 @@
 name: workflow_to_trigger
 run-name: ${{ github.actor }} is testing triggers
 on: 
-  [repository_dispatch]
+  [workflow_dispatch]
     
 jobs:
   workflow_trigger:
